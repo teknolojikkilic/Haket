@@ -15,7 +15,10 @@ jobs:
         with:
           gradle-version: '8.9'
       - run: gradle assembleDebug --no-daemon --stacktrace
+      - name: Outputlari listele
+        run: find app/build/outputs -type f || echo "outputs klasoru yok"
       - uses: actions/upload-artifact@v4
         with:
           name: HakEt-apk
-          path: app/build/outputs/apk/debug/app-de
+          path: app/build/outputs/apk/**/*.apk
+          if-no-files-found: warn
